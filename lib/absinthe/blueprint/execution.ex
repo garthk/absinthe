@@ -28,6 +28,7 @@ defmodule Absinthe.Blueprint.Execution do
   """
 
   alias Absinthe.Phase
+  alias Absinthe.Blueprint.Result
 
   @type acc :: map
 
@@ -56,7 +57,7 @@ defmodule Absinthe.Blueprint.Execution do
           | Result.Leaf
 
   def get(%{execution: %{result: nil} = exec} = bp_root, operation) do
-    result = %Absinthe.Blueprint.Result.Object{
+    result = %Result.Object{
       root_value: exec.root_value,
       emitter: operation
     }
@@ -75,7 +76,7 @@ defmodule Absinthe.Blueprint.Execution do
   end
 
   def get_result(%__MODULE__{result: nil, root_value: root_value}, operation) do
-    %Absinthe.Blueprint.Result.Object{
+    %Result.Object{
       root_value: root_value,
       emitter: operation
     }
