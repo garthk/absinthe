@@ -24,6 +24,7 @@ defmodule Absinthe.Mixfile do
         extras: extras(),
         groups_for_extras: groups_for_extras()
       ],
+      dialyzer: dialyzer(),
       deps: deps()
     ]
   end
@@ -66,10 +67,17 @@ defmodule Absinthe.Mixfile do
       {:dataloader, "~> 1.0.0", optional: true},
       {:ex_doc, "0.19.0-rc", only: :dev},
       {:benchfella, "~> 0.3.0", only: :dev},
-      {:dialyze, "~> 0.2", only: :dev},
+      {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false},
       {:decimal, "~> 1.0", optional: true},
       {:phoenix_pubsub, ">= 0.0.0", only: :test},
       {:mix_test_watch, "~> 0.4.1", only: [:test, :dev]}
+    ]
+  end
+
+  defp dialyzer() do
+    [
+      plt_add_deps: :apps_direct
+      # plt_ignore_apps: [:dataloader, :decimal],
     ]
   end
 
